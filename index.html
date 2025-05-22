@@ -3,31 +3,62 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Benim Sitem</title>
+  <title>Mehmet Baha Dursun</title>
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-  <header>
-    <h1>Merhaba! Benim Web Sayfam</h1>
-  </header>
+  <div class="container">
+    <aside class="sidebar">
+      <img src="assets/images/MehmetBahaDursun.jpg" alt="Profil Foto" class="profile-pic" />
+      <h1>Mehmet Baha Dursun</h1>
+      <p>Robotics Software Engineer</p>
+      <ul class="social-links">
+        <li><a href="https://github.com/Renbago" target="_blank">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/mehmet-baha-dursun/" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:baha.dursun123@gmail.com">Email</a></li>
+      </ul>
+    </aside>
 
-  <main>
-    <section>
-      <h2>Tanıtım Videosu</h2>
-      <video controls width="600">
-        <source src="assets/videos/tanitim.mp4" type="video/mp4" />
-        Tarayıcınız video etiketini desteklemiyor.
-      </video>
-    </section>
+    <main class="content">
+      <section id="video">
+        <h2></h2>
+        <video controls>
+          <source src="assets/videos/tanitim.mp4" type="video/mp4" />
+          Tarayıcınız video etiketini desteklemiyor.
+        </video>
+      </section>
 
-    <section>
-      <h2>Hakkımda</h2>
-      <p>Burası hakkımda bölümü. Basit ve sade tutacağım.</p>
-    </section>
-  </main>
+      <section id="about">
+        <h2>About Me</h2>
+        <p>Hi!, currently working as a Robotics Software Engineer at Saha Robotik, pursuing a fully funded Master's degree in Advanced Robotics at the University of Southern Denmark.</p>
+      </section>
+
+      <section id="projects">
+        <h2>Projects</h2>
+        <div class="project-grid">
+          <a href="saha-robotik.html" class="project-card">
+            <h3>Saha Robotik</h3>
+            <p>Autonomous Warehouse Systems</p>
+          </a>
+          <a href="bosch-fmc.html" class="project-card">
+            <h3>Bosch FMC 2024</h3>
+            <p>Autonomous Vehicle Challenge</p>
+          </a>
+          <a href="robotaksi.html" class="project-card">
+            <h3>Robotaksi Project</h3>
+            <p>Self-driving Car Simulation</p>
+          </a>
+          <a href="sdu.html" class="project-card">
+            <h3>SDU Projects</h3>
+            <p>Advanced Robotics Research</p>
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
 
   <footer>
-    <p>&copy; 2025 Benim Adım</p>
+    <p>&copy; 2025 Mehmet Baha Dursun</p>
   </footer>
 </body>
 </html>
