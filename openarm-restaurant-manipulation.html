@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Mehmet Baha Dursun's OpenArm mobile-manipulation project for restaurant table clearing at Saha Robotik."
+    >
+    <title>OpenArm for Restaurant Table Clearing - Mehmet Baha Dursun</title>
+    <link rel="stylesheet" href="assets/css/portfolio.css">
+  </head>
+  <body>
+    <main class="project-page">
+      <a class="back-link" href="index.html#projects">← Back to Projects &amp; Works</a>
+
+      <header class="project-hero">
+        <h1>OpenArm for Restaurant Table Clearing</h1>
+        <p class="people"><strong>Mehmet Baha Dursun</strong> · Project Lead, Saha Robotik</p>
+        <p class="venue">2026 - Present · Early-stage project at Saha Robotik</p>
+        <p class="resource-links">
+          <a href="https://openarm.dev/" target="_blank" rel="noreferrer">OpenArm</a><span>•</span>
+          <a href="https://mobile-aloha.github.io/" target="_blank" rel="noreferrer">Mobile ALOHA</a><span>•</span>
+          <a href="https://umi-gripper.github.io/" target="_blank" rel="noreferrer">UMI</a><span>•</span>
+          <a href="https://www.sunday.ai/" target="_blank" rel="noreferrer">Sunday Robotics</a><span>•</span>
+          <a href="assets/files/mehmet-baha-dursun-recommendation-letter.pdf" target="_blank">Recommendation Letter</a>
+        </p>
+      </header>
+
+      <div class="project-hero-media portrait-project-video">
+        <video controls playsinline preload="metadata" poster="assets/images/openarm-physical.jpg">
+          <source src="assets/media/openarm-physical-full.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="project-content">
+        <section>
+          <h2>What I am building</h2>
+          <p class="project-lede">
+            This is a new, early-stage project. The goal is a mobile, bimanual robot that
+            can move through a restaurant, stop at a table, and collect plates, glasses,
+            cutlery, and trays. Saha's existing mobile-robot stack will handle navigation
+            and positioning, while two OpenArm arms will learn the table work from human
+            demonstrations.
+          </p>
+          <p>
+            Sunday Robotics' table-clearing work is a useful product benchmark for this
+            direction. My aim is not to claim an affiliation or reproduce their robot;
+            it is to bring the same class of useful kitchen manipulation into Saha's
+            restaurant and service-robot setting using our own mobile base, OpenArm
+            hardware, and deployment experience.
+          </p>
+        </section>
+
+        <section>
+          <h2>Leading the project from the beginning</h2>
+          <p>
+            I have taken responsibility for the complete project pipeline at Saha
+            Robotik, including the research, planning, physical OpenArm setup,
+            teleoperation, data collection, model pipeline, evaluation plan, and future
+            integration with the company's mobile robots. I am leading both the
+            technical work and the overall direction of the project.
+          </p>
+          <p>
+            I am starting from the lessons of ALOHA and UMI and working toward a
+            scalable data and learning pipeline for the company. The longer-term plan
+            includes glove-based human demonstrations, following the UMI direction and
+            the kind of data pipeline shown by Sunday Robotics. There is no production
+            system or autonomous table-clearing result yet; I have only recently started
+            building the foundations, but I believe strongly in the direction.
+          </p>
+        </section>
+
+        <section>
+          <h2>The path I am following</h2>
+          <div class="source-grid">
+            <article class="source-card">
+              <h3>ALOHA and Mobile ALOHA</h3>
+              <p>
+                ALOHA provides the practical starting point for low-cost bimanual
+                teleoperation and learning from demonstrations. Mobile ALOHA shows how
+                that idea extends to a mobile platform and whole-body tasks. I use these
+                projects as system-design references, while keeping Saha's existing
+                navigation stack responsible for the first mobile deployments.
+              </p>
+              <p class="card-links">
+                <a href="https://tonyzhaozh.github.io/aloha/" target="_blank" rel="noreferrer">ALOHA</a> ·
+                <a href="https://mobile-aloha.github.io/" target="_blank" rel="noreferrer">Mobile ALOHA</a>
+              </p>
+            </article>
+
+            <article class="source-card">
+              <h3>UMI-style data collection</h3>
+              <p>
+                UMI is the reference for collecting portable, in-the-wild human
+                demonstrations before retargeting them to a robot. The first Saha
+                dataset will still come from the real OpenArm teleoperation path. Once
+                that contract is proven, an UMI-style wearable path can expand data
+                collection across real restaurant layouts.
+              </p>
+              <p class="card-links">
+                <a href="https://umi-gripper.github.io/" target="_blank" rel="noreferrer">Project</a> ·
+                <a href="https://github.com/real-stanford/universal_manipulation_interface" target="_blank" rel="noreferrer">Code</a>
+              </p>
+            </article>
+
+            <article class="source-card">
+              <h3>Sunday Robotics as a product reference</h3>
+              <p>
+                Sunday's Memo demonstrates the product experience I care about: clearing
+                tables, handling plates and delicate glasses, and learning from human
+                demonstrations collected away from the robot. For Saha, the target is a
+                restaurant-focused version of this task class, integrated with a
+                commercially deployed service-robot base.
+              </p>
+              <p class="card-links">
+                <a href="https://www.sunday.ai/" target="_blank" rel="noreferrer">Memo and its skills</a>
+              </p>
+            </article>
+
+            <article class="source-card">
+              <h3>OpenArm, LeRobot, and pi0.5</h3>
+              <p>
+                OpenArm is the physical bimanual platform. LeRobot supplies the dataset,
+                robot, and policy interfaces, while the current VLA path uses pi0.5 for
+                language-conditioned action chunks. Training happens off-board; the
+                deployment target keeps model inference on an onboard Jetson Orin.
+              </p>
+              <p class="card-links">
+                <a href="https://openarm.dev/" target="_blank" rel="noreferrer">OpenArm</a> ·
+                <a href="https://github.com/huggingface/lerobot" target="_blank" rel="noreferrer">LeRobot</a> ·
+                <a href="https://github.com/Physical-Intelligence/openpi" target="_blank" rel="noreferrer">OpenPI</a>
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Early simulation work</h2>
+          <div class="explained-video-list">
+            <article class="explained-video">
+              <div class="explained-video-player">
+                <video controls muted loop playsinline preload="metadata" poster="assets/images/openarm-simulation.jpg">
+                  <source src="assets/media/openarm-simulation.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div>
+                <h4>Testing the three-camera pipeline</h4>
+                <p>
+                  This is an early scripted simulation test for the front, left-wrist,
+                  and right-wrist observations and the bimanual action pipeline. It is
+                  part of building the foundation, not an autonomous or production result.
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2>How the pieces connect</h2>
+          <ol class="architecture-flow" aria-label="OpenArm restaurant manipulation project stages">
+            <li><strong>Navigate</strong><br>Saha's mobile base approaches and positions at the table</li>
+            <li><strong>Demonstrate</strong><br>OpenArm Mini teleoperation produces reviewed robot data</li>
+            <li><strong>Learn</strong><br>LeRobot and pi0.5 train a language-conditioned bimanual policy</li>
+            <li><strong>Check</strong><br>Simulation, no-motion, dry-run, and safety gates precede motion</li>
+            <li><strong>Goal</strong><br>The arms clear the table while the mobile stack remains in charge</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Preparing the SDU and Saha collaboration</h2>
+          <p>
+            In parallel, I am preparing the collaboration between Saha Robotik and SDU
+            Robotics and helping shape the Eurostars proposal around this project. My
+            goal is to connect the company project with my MSc thesis so that the
+            research, engineering work, and European collaboration can grow together.
+          </p>
+          <p>
+            My academic supervisor,
+            <a href="https://portal.findresearcher.sdu.dk/en/persons/i%C3%B1igo-iturrate/" target="_blank" rel="noreferrer">Associate Professor Iñigo Iturrate</a>,
+            described this direction in the recommendation letter supporting my thesis
+            funding application: the letter records the SDU and Saha dialogue, the expected
+            European grant proposal, and my plan to build AI for mobile manipulators in
+            the restaurant industry.
+          </p>
+          <p class="resource-links">
+            <a href="assets/files/mehmet-baha-dursun-recommendation-letter.pdf" target="_blank">Read the Recommendation Letter</a><span>•</span>
+            <a href="https://www.eurekanetwork.org/programmes-and-calls/eurostars/" target="_blank" rel="noreferrer">Eurostars</a><span>•</span>
+            <a href="https://portal.findresearcher.sdu.dk/en/persons/i%C3%B1igo-iturrate/" target="_blank" rel="noreferrer">Supervisor Profile</a>
+          </p>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

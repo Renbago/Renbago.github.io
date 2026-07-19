@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="The research and engineering story behind Mehmet Baha Dursun's physical dVRK diffusion-policy pipeline at SDU.">
+    <title>dVRK Diffusion Policy - Mehmet Baha Dursun</title>
+    <link rel="stylesheet" href="assets/css/portfolio.css">
+  </head>
+  <body>
+    <main class="project-page">
+      <a class="back-link" href="index.html#projects">← Back to Projects &amp; Works</a>
+
+      <header class="project-hero">
+        <h1>Diffusion Policy for Robotic Suturing with the dVRK</h1>
+        <p class="people">
+          <strong>Mehmet Baha Dursun</strong> · University of Southern Denmark ·
+          supervised by
+          <a href="https://portal.findresearcher.sdu.dk/en/persons/i%C3%B1igo-iturrate/" target="_blank" rel="noreferrer">Iñigo Iturrate</a>
+        </p>
+        <p class="venue">Student Research Assistant, October 2025 - May 2026</p>
+        <p class="resource-links">
+          <a href="assets/files/dvrk-vision-encoders-report.pdf" target="_blank">Project Report</a><span>•</span>
+          <a href="https://arxiv.org/abs/2505.16596" target="_blank" rel="noreferrer">Starting Paper</a><span>•</span>
+          <a href="https://youtu.be/prwcpp9BP9c" target="_blank" rel="noreferrer">Short Result Video</a><span>•</span>
+          <a href="https://portal.findresearcher.sdu.dk/en/persons/i%C3%B1igo-iturrate/" target="_blank" rel="noreferrer">Supervisor</a>
+        </p>
+      </header>
+
+      <div class="project-hero-media">
+        <video controls playsinline preload="metadata" poster="assets/images/dvrk-diffusion-policy-full.jpg">
+          <source src="assets/media/dvrk-diffusion-policy-full.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="project-content">
+        <section>
+          <h2>Overview</h2>
+          <p class="project-lede">
+            I built and integrated the complete learning pipeline for a bimanual suturing
+            task on the physical da Vinci Research Kit: robot and camera acquisition,
+            synchronized demonstrations, dataset conversion, policy architecture,
+            training, ROS 1 deployment, closed-loop execution, diagnostics, and
+            real-robot evaluation.
+          </p>
+        </section>
+
+        <section>
+          <h2>Starting Point</h2>
+          <div class="source-grid">
+            <article class="source-card">
+              <h3>Diffusion Policy</h3>
+              <p>
+                I first came across Diffusion Policy while watching LeRobot project
+                videos. From there, I followed the references to Cheng Chi's original
+                work and studied related robot-learning research from Toyota Research
+                Institute in parallel. That was how I learned the action-diffusion
+                idea before adapting it to the SDU dVRK setup.
+              </p>
+              <p class="card-links">
+                <a href="https://github.com/huggingface/lerobot" target="_blank" rel="noreferrer">LeRobot</a> ·
+                <a href="https://diffusion-policy.cs.columbia.edu/" target="_blank" rel="noreferrer">Project</a> ·
+                <a href="https://arxiv.org/abs/2303.04137" target="_blank" rel="noreferrer">Paper</a> ·
+                <a href="https://github.com/columbia-ai-robotics/diffusion_policy" target="_blank" rel="noreferrer">Code</a> ·
+                <a href="https://cheng-chi.github.io/" target="_blank" rel="noreferrer">Cheng Chi</a>
+              </p>
+            </article>
+
+            <article class="source-card">
+              <h3>Johns Hopkins dVRK stack</h3>
+              <p>
+                The robot interface was grounded in Johns Hopkins University's open
+                da Vinci Research Kit software. I built the project-specific recording,
+                policy, control, and evaluation layers around the physical SDU setup.
+              </p>
+              <p class="card-links">
+                <a href="https://github.com/jhu-dvrk/sawIntuitiveResearchKit" target="_blank" rel="noreferrer">JHU Repository</a> ·
+                <a href="https://github.com/jhu-dvrk/sawIntuitiveResearchKit/wiki" target="_blank" rel="noreferrer">Documentation</a>
+              </p>
+            </article>
+
+            <article class="source-card">
+              <h3>Safe robotic suturing at SDU</h3>
+              <p>
+                The local starting point was an SDU study of uncertainty-aware diffusion
+                policies and control-barrier safety in simulation. My work addressed the
+                missing physical pipeline and the train-to-robot gap on the real dVRK.
+              </p>
+              <p class="card-links">
+                <a href="https://arxiv.org/abs/2505.16596" target="_blank" rel="noreferrer">Safe Uncertainty-Aware Learning of Robotic Suturing</a>
+              </p>
+            </article>
+
+            <article class="source-card">
+              <h3>Representation diagnostics</h3>
+              <p>
+                I adapted feature-decoding ideas and utilities from LeWorldModel, whose
+                authors include Yann LeCun, then integrated them with my own physical
+                pose probes, modality attribution, and needle-localization tests.
+              </p>
+              <p class="card-links">
+                <a href="https://github.com/linzhongzi/le-worldmodel" target="_blank" rel="noreferrer">LeWorldModel</a> ·
+                <a href="https://github.com/facebookresearch/dinov2" target="_blank" rel="noreferrer">DINOv2</a>
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2>Building the Physical System</h2>
+          <ol class="architecture-flow" aria-label="dVRK learning and deployment pipeline">
+            <li><strong>Record</strong><br>Endoscope video and dual-arm robot state at 10 Hz</li>
+            <li><strong>Structure</strong><br>LeRobot v3 episodes with synchronized observations and actions</li>
+            <li><strong>Train</strong><br>Vision-conditioned diffusion policy with 16-step prediction chunks</li>
+            <li><strong>Diagnose</strong><br>Decoder, pose, modality, and needle-localization probes</li>
+            <li><strong>Deploy</strong><br>ROS 1 closed-loop inference on the physical dVRK</li>
+          </ol>
+
+          <ul class="ownership-list">
+            <li>Set up and calibrated the physical camera/robot data path.</li>
+            <li>Recorded and validated 84 demonstrations: 43,890 frames at 10 FPS.</li>
+            <li>Defined a 20D dual-arm position, rot6d, and jaw representation.</li>
+            <li>Implemented anchored-relative Cartesian action decoding.</li>
+            <li>Integrated training, checkpoints, normalization, and EMA evaluation.</li>
+            <li>Designed ResNet34 and DINOv2 controlled comparisons.</li>
+            <li>Built offline debug videos and representation test tooling.</li>
+            <li>Integrated ROS 1 inference and evaluated physical closed-loop trials.</li>
+          </ul>
+        </section>
+
+        <section id="resnet-debugging">
+          <h2>What Went Wrong with ResNet</h2>
+          <p>
+            My first policies used the full proprioceptive state together with the
+            endoscope image. At the beginning I treated the failure as a data or control
+            representation problem. I rebuilt the pipeline around absolute Cartesian
+            targets, step-relative motion, and finally anchored-relative targets. I also
+            changed the rotation representation to rot6d, reworked normalization, and
+            checked that the dataset labels and the ROS execution path decoded the same
+            20D command for PSM1 and PSM2.
+          </p>
+          <p>
+            Those changes fixed real implementation problems, but not the main behavior.
+            If I moved the needle or raised the suturing pad, the ResNet policy still
+            tended to replay a grasp associated with the current arm pose. By then it was
+            clear to me that collecting more of the same demonstrations would not explain
+            the failure. I first needed to know what the image encoder was actually
+            preserving.
+          </p>
+          <p>
+            Inspired by the state-input dropout used in
+            <a href="https://github.com/NVIDIA/Isaac-GR00T" target="_blank" rel="noreferrer">NVIDIA Isaac GR00T</a>,
+            I trained ResNet policies while randomly or completely removing the robot
+            state. The physical results became much worse instead of recovering from the
+            image. That was an important clue: removing the shortcut did not help if the
+            visual features still failed to represent the needle.
+          </p>
+        </section>
+
+        <section id="encoder-diagnostics">
+          <h2>Looking Inside the Encoder</h2>
+          <p>
+            To inspect the encoder directly, I started from the decoder feature-inversion
+            approach in LeWorldModel, developed by Yann LeCun and collaborators, and
+            adapted it to the dVRK checkpoints. I then expanded it into a diagnostic
+            pipeline with decoder reconstructions, linear and MLP tool-pose probes,
+            image-versus-state counterfactual ablations, and a patch-similarity test that
+            queried the thin suturing needle across different frames.
+          </p>
+          <p>
+            The decoder was the first useful visualization. ResNet retained enough of the
+            broad scene and robot geometry to support low offline loss, but its
+            reconstruction blurred away the thin needle. The DINOv2 reconstruction kept
+            both the needle and the suture much more clearly. A decoder image alone is not
+            proof, so I used the other probes to check the same conclusion from different
+            directions.
+          </p>
+          <figure class="report-figure">
+            <a href="assets/images/dvrk-encoder-decoder-comparison.png" target="_blank">
+              <img src="assets/images/dvrk-encoder-decoder-comparison.png" alt="DINOv2 and ResNet34 decoder reconstructions from the dVRK report" loading="lazy">
+            </a>
+            <figcaption>
+              Decoder feature inversion from my report. DINOv2 preserves the needle and
+              suture, while the ResNet34 reconstruction loses the fine structure.
+            </figcaption>
+          </figure>
+        </section>
+
+        <section id="dinov2">
+          <h2>Moving to DINOv2</h2>
+          <p>
+            After the ResNet diagnostics, I replaced the visual front-end with a
+            fine-tuned DINOv2 ViT-S/14. I kept the dataset, anchored-relative action
+            representation, diffusion model, and physical deployment path fixed so that
+            the encoder was the main change. The DINO patch features followed the needle
+            across frames, whereas the ResNet similarity remained spread over the tissue
+            and tool bodies.
+          </p>
+          <figure class="report-figure report-figure-wide">
+            <a href="assets/images/dvrk-needle-similarity.png" target="_blank">
+              <img src="assets/images/dvrk-needle-similarity.png" alt="Needle similarity overlays comparing DINOv2 and ResNet34" loading="lazy">
+            </a>
+            <figcaption>
+              Needle-query similarity across four frames. DINOv2 remains selective around
+              the moving needle; ResNet34 does not isolate it.
+            </figcaption>
+          </figure>
+          <p>
+            DINOv2 without dropout still used some robot state, so I trained a controlled
+            sweep with state-dropout probabilities 0, 0.2, and 1.0. The measured vision
+            share rose from 0.76 to 0.975 and then 0.995. In the final state-free run, the
+            policy had to form its action from the endoscope images and no longer showed
+            the same state-linked failure in the tested physical trials.
+          </p>
+          <figure class="report-figure report-figure-chart">
+            <a href="assets/images/dvrk-state-dropout-vision-share.png" target="_blank">
+              <img src="assets/images/dvrk-state-dropout-vision-share.png" alt="DINOv2 state-dropout sweep and measured vision share" loading="lazy">
+            </a>
+            <figcaption>
+              The DINOv2 state-dropout sweep from the report. Increasing dropout forced
+              the deployed policy to rely on the visual observation instead of the
+              proprioceptive shortcut.
+            </figcaption>
+          </figure>
+          <p class="project-note">
+            The encoder comparison is documented as an individual project report. The
+            physical observations are qualitative, and the report states the remaining
+            resolution and probe-sample confounds explicitly.
+          </p>
+        </section>
+
+        <section>
+          <h2>Robot Experiments</h2>
+          <div class="video-grid">
+            <a class="video-card" href="https://youtu.be/prwcpp9BP9c" target="_blank" rel="noreferrer">
+              <img src="https://img.youtube.com/vi/prwcpp9BP9c/hqdefault.jpg" alt="DINOv2 state-free dVRK trial" loading="lazy">
+              <span>DINOv2 · fully vision-based physical trial</span>
+            </a>
+            <a class="video-card" href="https://www.youtube.com/watch?v=RQqh8OGS29A" target="_blank" rel="noreferrer">
+              <img src="https://img.youtube.com/vi/RQqh8OGS29A/hqdefault.jpg" alt="ResNet state-following dVRK trial" loading="lazy">
+              <span>ResNet · state-shortcut behavior, trial 1</span>
+            </a>
+            <a class="video-card" href="https://www.youtube.com/watch?v=7DfvQMrawWA" target="_blank" rel="noreferrer">
+              <img src="https://img.youtube.com/vi/7DfvQMrawWA/hqdefault.jpg" alt="ResNet state-following dVRK trial" loading="lazy">
+              <span>ResNet · state-shortcut behavior, trial 2</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

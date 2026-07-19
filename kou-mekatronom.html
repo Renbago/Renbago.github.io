@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="KOU-Mekatronom autonomous vehicle projects by Mehmet Baha Dursun.">
+    <title>KOU-Mekatronom - Mehmet Baha Dursun</title>
+    <link rel="stylesheet" href="assets/css/portfolio.css">
+  </head>
+  <body>
+    <main class="project-page">
+      <a class="back-link" href="index.html#projects">← Back to Projects &amp; Works</a>
+
+      <header class="project-hero">
+        <h1>KOU-Mekatronom Autonomous Vehicle Team</h1>
+        <p class="people"><strong>Team Member → Team Lead → Mentor</strong> · Kocaeli University</p>
+        <p class="venue">November 2021 - February 2026</p>
+        <p class="resource-links">
+          <a href="https://github.com/Renbago/autonomus_vehicle" target="_blank" rel="noreferrer">BFMC GitHub</a><span>•</span>
+          <a href="https://github.com/Renbago/autonomus_car_sim_base_ros2" target="_blank" rel="noreferrer">Robotaxi GitHub</a><span>•</span>
+          <a href="https://www.youtube.com/watch?v=WsCecAzwwFc&amp;list=PLDE_vDxu0Gkk-s3ndTqIScKTHSvL8dt0m" target="_blank" rel="noreferrer">Video Series</a>
+        </p>
+      </header>
+
+      <div class="project-hero-media">
+        <img src="assets/images/Baha_Bosch.jpg" alt="Bosch Future Mobility Challenge track" width="2048" height="1367">
+      </div>
+
+      <div class="project-content">
+        <section>
+          <h2>Overview</h2>
+          <p>
+            I joined KOU-Mekatronom in November 2021, later led the 20-person
+            autonomous-vehicle team, and continued mentoring the next student
+            generation until February 2026.
+          </p>
+          <p>
+            Our systems covered nonlinear model predictive control, visual-inertial
+            localization, obstacle detection, traffic-sign perception, path planning,
+            parking, and full-size Robotaxi integration.
+          </p>
+          <p>
+            In Teknofest Robotaxi, we progressed from 19th place in 2022 to 6th
+            place in 2023; I then mentored the 2024 team. In BFMC 2024, we were
+            the only Turkish team among 160 international applicants to reach the
+            24-team final in Cluj-Napoca, Romania.
+          </p>
+        </section>
+
+        <section id="bfmc">
+          <h2>Bosch Future Mobility Challenge 2024</h2>
+          <p class="project-lede">
+            I led KOU-Mekatronom's 20-member autonomous-vehicle team and the
+            technical development of our 1/10-scale vehicle. We became the only
+            Turkish finalist in 2024, reaching the global top 24 from 160
+            international teams.
+          </p>
+          <p class="resource-links">
+            <a href="https://github.com/Renbago/autonomus_vehicle" target="_blank" rel="noreferrer">GitHub</a><span>•</span>
+            <a href="https://github.com/Renbago/autonomus_vehicle#project-explanation" target="_blank" rel="noreferrer">Detailed README</a><span>•</span>
+            <a href="https://github.com/Renbago/autonomus_vehicle/tree/docker" target="_blank" rel="noreferrer">Docker Branch</a><span>•</span>
+            <a href="https://github.com/Renbago/autonomus_vehicle/blob/main/autonomus_vehicle.docx.pdf" target="_blank" rel="noreferrer">Bachelor's Thesis</a><span>•</span>
+            <a href="https://www.aa.com.tr/tr/bilim-teknoloji/muhendis-adaylari-gelistirdikleri-otonom-aracla-uluslararasi-yarismada-kursuyu-hedefliyor/3209788" target="_blank" rel="noreferrer">Anadolu Agency</a>
+          </p>
+
+          <h3>The Pipeline</h3>
+          <ol class="architecture-flow" aria-label="BFMC autonomous driving architecture">
+            <li><strong>Perceive</strong><br>ZED 2i vision, YOLO signs, and point-cloud obstacles</li>
+            <li><strong>Localize</strong><br>Encoder and IMU fusion through robot_localization</li>
+            <li><strong>Plan</strong><br>GraphML road network and Dijkstra shortest path</li>
+            <li><strong>React</strong><br>Behavior states, obstacle checks, and route regeneration</li>
+            <li><strong>Control</strong><br>CasADi nonlinear MPC with state-specific tuning</li>
+          </ol>
+
+          <h3>My Role</h3>
+          <p>
+            I served as team captain from 2022 and developed the integrated autonomy
+            stack represented in the public repository from May 2023 onward. The same
+            planning and control logic was designed to run in Gazebo and on the real
+            vehicle. I coordinated competition planning while also owning much of the
+            integration, testing, and real-track parameter tuning.
+          </p>
+          <p>
+            I built this project while working full-time at Saha Robotik, mostly during
+            evenings and weekends. Competition deadlines meant that some scenario logic
+            remained hard-coded in the working Python implementation. After graduating,
+            I started a cleaner C++ port and handed the repository to the next student
+            team rather than presenting the unfinished parts as complete.
+          </p>
+          <p>
+            The controller used a CasADi nonlinear MPC built around a bicycle model,
+            while obstacle avoidance was formulated through Euclidean-distance
+            constraints. For localization, I combined ZED 2i visual odometry and IMU
+            data with wheel encoders and an additional IMU through
+            <code>robot_localization</code>. I also converted the ZED point cloud into
+            a 2D scan with <code>pointcloud_to_laserscan</code>, filtering the floor
+            before feeding the obstacle-detection pipeline.
+          </p>
+          <ul class="ownership-list">
+            <li>Graph-based route representation and start/target selection.</li>
+            <li>Dijkstra planning with excluded-node support.</li>
+            <li>Dynamic/static obstacle tracking and graph-level replanning.</li>
+            <li>Nonlinear MPC waypoint following and real-time parameter tuning.</li>
+            <li>YOLO-driven traffic-sign and scenario behavior states.</li>
+            <li>Watchdog-style behavior timers for competition maneuvers.</li>
+            <li>ZED 2i, wheel-encoder, and IMU localization integration.</li>
+            <li>Real/simulation validation and team-wide technical coordination.</li>
+          </ul>
+
+          <h3>How the Vehicle Decides</h3>
+          <p>
+            A GraphML file stores the road network. After choosing a start and target
+            node, Dijkstra generates the route while allowing specific nodes to be
+            excluded. The nonlinear MPC then follows the next <code>node_id</code> in
+            that route.
+          </p>
+          <p>
+            The obstacle detector sends each object's center position and velocity to
+            the control layer. If an obstacle overlaps the active graph route, the
+            response depends on the node configuration: a <code>pass_through</code> node
+            allows a move into the left lane; otherwise the vehicle waits. Once the
+            obstacle moves, Dijkstra runs again and the route is updated.
+          </p>
+          <p>
+            YOLO detections and obstacle events also update the behavior state. Without
+            an event the default is <code>keep_lane</code>. Each state has separately
+            tuned MPC parameters, while <code>behaviour_timer</code> and
+            <code>behaviour_callback</code> provide watchdog-like timing for competition
+            scenarios.
+          </p>
+
+          <h3>Videos from the Project</h3>
+          <div class="explained-video-list">
+            <article class="explained-video">
+              <div class="explained-video-player">
+                <iframe src="https://www.youtube-nocookie.com/embed/WsCecAzwwFc?list=PLDE_vDxu0Gkk-s3ndTqIScKTHSvL8dt0m" title="BFMC qualification run and video series" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <div>
+                <h4>Qualification Run and Full Video Series</h4>
+                <p>
+                  This is the main qualification run for BFMC. The linked playlist
+                  continues with the individual tests recorded while I was building and
+                  tuning the competition stack.
+                </p>
+                <a href="https://www.youtube.com/watch?v=WsCecAzwwFc&amp;list=PLDE_vDxu0Gkk-s3ndTqIScKTHSvL8dt0m" target="_blank" rel="noreferrer">Watch qualification and playlist</a>
+              </div>
+            </article>
+
+            <article class="explained-video">
+              <div class="explained-video-player">
+                <iframe src="https://www.youtube-nocookie.com/embed/udwPYgNa-Cw" title="BFMC autonomy stack running in simulation" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <div>
+                <h4>Complete Stack in Simulation</h4>
+                <p>
+                  This run shows the components working together: obstacle detection,
+                  GraphML/Dijkstra route planning, nonlinear MPC, traffic-sign behavior,
+                  obstacle avoidance, and route regeneration.
+                </p>
+                <a href="https://www.youtube.com/watch?v=udwPYgNa-Cw" target="_blank" rel="noreferrer">Watch the full simulation</a>
+              </div>
+            </article>
+
+            <article class="explained-video">
+              <div class="explained-video-player">
+                <iframe src="https://www.youtube-nocookie.com/embed/VL7k0jOKzI8" title="Parking and obstacle detection from the vehicle camera" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <div>
+                <h4>Parking from the Vehicle</h4>
+                <p>
+                  A real-vehicle view of the parking behavior with the obstacle-detection
+                  output running at the same time. This was one of the scenarios used to
+                  tune the perception-to-control handoff on the physical car.
+                </p>
+                <a href="https://www.youtube.com/watch?v=VL7k0jOKzI8" target="_blank" rel="noreferrer">Watch the real-car test</a>
+              </div>
+            </article>
+
+            <article class="explained-video">
+              <div class="explained-video-player">
+                <iframe src="https://www.youtube-nocookie.com/embed/fv_t_IlpWR4" title="Parking goal selection and replanning in simulation" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <div>
+                <h4>Parking and Replanning</h4>
+                <p>
+                  The parking locations were stored in the real track coordinate system.
+                  When an obstacle occupied the selected space, the behavior changed the
+                  goal and regenerated the path with Dijkstra. This simulation shows that
+                  decision process clearly.
+                </p>
+                <a href="https://www.youtube.com/watch?v=fv_t_IlpWR4" target="_blank" rel="noreferrer">Watch the replanning test</a>
+              </div>
+            </article>
+          </div>
+
+          <h3>Code References</h3>
+          <div class="source-grid">
+            <article class="source-card">
+              <h3>Graph and path planning</h3>
+              <p>
+                Configurable GraphML road networks, Dijkstra search, excluded nodes,
+                and route regeneration when an obstacle invalidates the active path.
+              </p>
+              <p class="card-links">
+                <a href="https://github.com/Renbago/autonomus_vehicle/blob/main/src/example/config/fixed2.graphml" target="_blank" rel="noreferrer">Road Graph</a> ·
+                <a href="https://github.com/Renbago/autonomus_vehicle/blob/main/src/example/include/mekatronom/utilities/djikstra.h" target="_blank" rel="noreferrer">Dijkstra</a>
+              </p>
+            </article>
+
+            <article class="source-card">
+              <h3>Obstacle-aware control</h3>
+              <p>
+                Tracked obstacle position and velocity are checked against the route;
+                the vehicle either changes lane, waits, or requests a new path.
+              </p>
+              <p class="card-links">
+                <a href="https://github.com/Renbago/autonomus_vehicle/tree/main/src/obstacle_detector" target="_blank" rel="noreferrer">Obstacle Detector</a> ·
+                <a href="https://github.com/Renbago/autonomus_vehicle/blob/main/src/example/include/mekatronom/utilities/mpc_running.h" target="_blank" rel="noreferrer">MPC Integration</a>
+              </p>
+            </article>
+
+            <article class="source-card">
+              <h3>Behavior management</h3>
+              <p>
+                Perception events change driving modes from the default lane-following
+                state, with state-specific MPC parameters and timed scenario callbacks.
+              </p>
+              <p class="card-links">
+                <a href="https://github.com/Renbago/autonomus_vehicle/blob/main/src/example/include/mekatronom/utilities/traffic_sign_manager.h" target="_blank" rel="noreferrer">Behavior Manager</a> ·
+                <a href="https://github.com/Renbago/autonomus_vehicle/blob/main/src/example/include/mekatronom/utilities/mpc_start_setting.h" target="_blank" rel="noreferrer">Controller Tuning</a>
+              </p>
+            </article>
+
+            <article class="source-card">
+              <h3>Runtime and Docker</h3>
+              <p>
+                The complete competition flow runs from <code>mpc.py</code>. The Docker
+                branch packages the ROS workspace, Gazebo track, RViz configuration,
+                and supporting nodes into one reproducible environment.
+              </p>
+              <p class="card-links">
+                <a href="https://github.com/Renbago/autonomus_vehicle/blob/devel/src/example/src/mpc.py" target="_blank" rel="noreferrer">Working Python Node</a> ·
+                <a href="https://github.com/Renbago/autonomus_vehicle/tree/docker" target="_blank" rel="noreferrer">Docker Branch</a>
+              </p>
+            </article>
+          </div>
+
+          <h3>Code Status and Hand-off</h3>
+          <p class="project-note">
+            The Python implementation contains the complete competition behavior. The
+            cleaner C++ port reached dynamic/static obstacle detection, waypoint-based
+            nonlinear MPC, <code>robot_localization</code>, and obstacle-triggered path
+            regeneration, but its traffic-sign scenarios were not completed before the
+            hand-off. I built the stack on the open-source
+            <a href="https://github.com/MMehrez/MPC-and-MHE-implementation-in-MATLAB-using-Casadi/tree/master/workshop_github" target="_blank" rel="noreferrer">CasADi MPC workshop</a>,
+            <a href="https://github.com/jk-ethz/obstacle_detector" target="_blank" rel="noreferrer">obstacle_detector</a>,
+            <a href="https://github.com/cra-ros-pkg/robot_localization" target="_blank" rel="noreferrer">robot_localization</a>,
+            and <a href="https://github.com/ultralytics/ultralytics" target="_blank" rel="noreferrer">Ultralytics YOLO</a>, then integrated and extended them for the BFMC vehicle.
+          </p>
+        </section>
+
+        <section id="robotaxi">
+          <h2>Teknofest Robotaxi</h2>
+          <p>
+            I led the team through the national full-size autonomous-vehicle program,
+            starting with OpenCV, YOLO, and direct motor control before integrating
+            perception, planning, and control into the competition vehicle. We moved
+            from 19th place in 2022 to 6th place in 2023, and I continued as a mentor
+            for the 2024 team.
+          </p>
+          <p class="resource-links">
+            <a href="https://github.com/Renbago/autonomus_car_sim_base_ros2" target="_blank" rel="noreferrer">GitHub</a><span>•</span>
+            <a href="https://github.com/Renbago/autonomus_vehicle/blob/main/autonomus_vehicle.docx.pdf" target="_blank" rel="noreferrer">Bachelor's Thesis</a>
+          </p>
+          <div class="explained-video-list">
+            <article class="explained-video">
+              <div class="explained-video-player">
+                <iframe src="https://www.youtube-nocookie.com/embed/WffA08OOQCI" title="KOU-Mekatronom full-size Robotaxi competition run" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <div>
+                <h4>2023 Full-Size Competition Vehicle</h4>
+                <p>
+                  This is the real vehicle from the 2023 competition. We used OpenCV,
+                  YOLO, and direct motor-control foundations to complete the autonomous
+                  course and finished sixth among the university teams.
+                </p>
+                <a href="https://www.youtube.com/watch?v=WffA08OOQCI" target="_blank" rel="noreferrer">Watch the competition run</a>
+              </div>
+            </article>
+
+            <article class="explained-video">
+              <div class="explained-video-player">
+                <iframe src="https://www.youtube-nocookie.com/embed/PAcczZ4cFB4" title="Teknofest Robotaxi competition overview" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <div>
+                <h4>About the Robotaxi Competition</h4>
+                <p>
+                  This overview gives the scale and format of Teknofest Robotaxi, the
+                  national full-size autonomous-vehicle competition in which I led the
+                  KOU-Mekatronom team.
+                </p>
+                <a href="https://www.youtube.com/watch?v=PAcczZ4cFB4" target="_blank" rel="noreferrer">Watch the competition overview</a>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
