@@ -434,6 +434,25 @@ a {
   height: min(72vh, 760px);
 }
 
+.project-logo-media {
+  width: min(620px, 100%);
+  padding: 32px 48px;
+  margin: 34px auto 0;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.project-logo-media a,
+.project-logo-media img {
+  display: block;
+}
+
+.project-logo-media img {
+  width: 100%;
+  height: auto;
+}
+
 .project-content {
   max-width: 900px;
   margin: 46px auto 0;
