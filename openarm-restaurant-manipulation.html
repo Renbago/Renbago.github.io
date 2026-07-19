@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="Mehmet Baha Dursun's OpenArm mobile-manipulation project for restaurant table clearing at Saha Robotik."
+      content="Mehmet Baha Dursun's early-stage bimanual mobile-manipulation project for restaurant table clearing at Saha Robotik."
     >
-    <title>OpenArm for Restaurant Table Clearing - Mehmet Baha Dursun</title>
+    <title>Bimanual Robot for Restaurant Table Clearing - Mehmet Baha Dursun</title>
     <link rel="stylesheet" href="assets/css/portfolio.css">
   </head>
   <body>
@@ -15,7 +15,7 @@
       <a class="back-link" href="index.html#projects">← Back to Projects &amp; Works</a>
 
       <header class="project-hero">
-        <h1>OpenArm for Restaurant Table Clearing</h1>
+        <h1>Bimanual Robot for Restaurant Table Clearing</h1>
         <p class="people"><strong>Mehmet Baha Dursun</strong> · Project Lead, Saha Robotik</p>
         <p class="venue">2026 - Present · Early-stage project at Saha Robotik</p>
         <p class="resource-links">
@@ -40,8 +40,15 @@
             This is a new, early-stage project. The goal is a mobile, bimanual robot that
             can move through a restaurant, stop at a table, and collect plates, glasses,
             cutlery, and trays. Saha's existing mobile-robot stack will handle navigation
-            and positioning, while two OpenArm arms will learn the table work from human
-            demonstrations.
+            and positioning, while the manipulation system will learn the table work from
+            human demonstrations.
+          </p>
+          <p>
+            OpenArm was selected as the initial reference and prototyping platform so we
+            can move quickly through hardware bring-up, teleoperation, data collection,
+            and policy experiments. It is not the final product goal. As the project
+            matures, the plan is to design Saha's own bimanual arm system and transition
+            the learning pipeline to that hardware.
           </p>
           <p>
             Sunday Robotics' table-clearing work is a useful product benchmark for this
@@ -56,7 +63,7 @@
           <h2>Leading the project from the beginning</h2>
           <p>
             I have taken responsibility for the complete project pipeline at Saha
-            Robotik, including the research, planning, physical OpenArm setup,
+            Robotik, including the research, planning, initial OpenArm setup,
             teleoperation, data collection, model pipeline, evaluation plan, and future
             integration with the company's mobile robots. I am leading both the
             technical work and the overall direction of the project.
@@ -119,12 +126,13 @@
             </article>
 
             <article class="source-card">
-              <h3>OpenArm, LeRobot, and pi0.5</h3>
+              <h3>Starting with OpenArm, LeRobot, and pi0.5</h3>
               <p>
-                OpenArm is the physical bimanual platform. LeRobot supplies the dataset,
-                robot, and policy interfaces, while the current VLA path uses pi0.5 for
-                language-conditioned action chunks. Training happens off-board; the
-                deployment target keeps model inference on an onboard Jetson Orin.
+                OpenArm is the initial physical reference platform, chosen to accelerate
+                the first experiments rather than define the final product. LeRobot
+                supplies the dataset, robot, and policy interfaces, while the current VLA
+                path uses pi0.5 for language-conditioned action chunks. The same learning
+                pipeline is intended to move to Saha's own future bimanual hardware.
               </p>
               <p class="card-links">
                 <a href="https://openarm.dev/" target="_blank" rel="noreferrer">OpenArm</a> ·
@@ -136,29 +144,8 @@
         </section>
 
         <section>
-          <h2>Early simulation work</h2>
-          <div class="explained-video-list">
-            <article class="explained-video">
-              <div class="explained-video-player">
-                <video controls muted loop playsinline preload="metadata" poster="assets/images/openarm-simulation.jpg">
-                  <source src="assets/media/openarm-simulation.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div>
-                <h4>Testing the three-camera pipeline</h4>
-                <p>
-                  This is an early scripted simulation test for the front, left-wrist,
-                  and right-wrist observations and the bimanual action pipeline. It is
-                  part of building the foundation, not an autonomous or production result.
-                </p>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <section>
           <h2>How the pieces connect</h2>
-          <ol class="architecture-flow" aria-label="OpenArm restaurant manipulation project stages">
+          <ol class="architecture-flow" aria-label="Bimanual restaurant manipulation project stages">
             <li><strong>Navigate</strong><br>Saha's mobile base approaches and positions at the table</li>
             <li><strong>Demonstrate</strong><br>OpenArm Mini teleoperation produces reviewed robot data</li>
             <li><strong>Learn</strong><br>LeRobot and pi0.5 train a language-conditioned bimanual policy</li>

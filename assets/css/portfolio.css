@@ -727,16 +727,11 @@ a {
   border-radius: 6px;
 }
 
-.explained-video-player iframe,
-.explained-video-player video {
+.explained-video-player iframe {
   display: block;
   width: 100%;
   border: 0;
   aspect-ratio: 16 / 9;
-}
-
-.explained-video-player video {
-  object-fit: contain;
 }
 
 .explained-video h4 {
