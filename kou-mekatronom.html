@@ -14,7 +14,7 @@
       <header class="project-hero">
         <h1>KOU-Mekatronom Autonomous Vehicle Team</h1>
         <p class="people"><strong>Team Member → Team Lead → Mentor</strong> · Kocaeli University</p>
-        <p class="venue">November 2021 - February 2026</p>
+        <p class="venue">November 2021 - Present</p>
         <p class="resource-links">
           <a href="https://github.com/Renbago/autonomus_vehicle" target="_blank" rel="noreferrer">BFMC GitHub</a><span>•</span>
           <a href="https://github.com/Renbago/autonomus_car_sim_base_ros2" target="_blank" rel="noreferrer">Robotaxi GitHub</a><span>•</span>
@@ -30,20 +30,16 @@
         <section>
           <h2>Overview</h2>
           <p>
-            I joined KOU-Mekatronom in November 2021, later led the 20-person
-            autonomous-vehicle team, and continued mentoring the next student
-            generation until February 2026.
+            I joined KOU-Mekatronom in November 2021 and later led the 20-person
+            autonomous-vehicle team. I led the team through 2024 and have continued to
+            mentor the following student generations since then. As of 2026 I am still a
+            mentor, but with very limited time, stepping in mainly on critical points.
           </p>
           <p>
             Our systems covered nonlinear model predictive control, visual-inertial
             localization, obstacle detection, traffic-sign perception, path planning,
-            parking, and full-size Robotaxi integration.
-          </p>
-          <p>
-            In Teknofest Robotaxi, we progressed from 19th place in 2022 to 6th
-            place in 2023; I then mentored the 2024 team. In BFMC 2024, we were
-            the only Turkish team among 160 international applicants to reach the
-            24-team final in Cluj-Napoca, Romania.
+            parking, and full-size Robotaxi integration. In Teknofest Robotaxi we
+            progressed from 19th place in 2022 to 6th place in 2023.
           </p>
         </section>
 
@@ -106,28 +102,6 @@
             <li>ZED 2i, wheel-encoder, and IMU localization integration.</li>
             <li>Real/simulation validation and team-wide technical coordination.</li>
           </ul>
-
-          <h3>How the Vehicle Decides</h3>
-          <p>
-            A GraphML file stores the road network. After choosing a start and target
-            node, Dijkstra generates the route while allowing specific nodes to be
-            excluded. The nonlinear MPC then follows the next <code>node_id</code> in
-            that route.
-          </p>
-          <p>
-            The obstacle detector sends each object's center position and velocity to
-            the control layer. If an obstacle overlaps the active graph route, the
-            response depends on the node configuration: a <code>pass_through</code> node
-            allows a move into the left lane; otherwise the vehicle waits. Once the
-            obstacle moves, Dijkstra runs again and the route is updated.
-          </p>
-          <p>
-            YOLO detections and obstacle events also update the behavior state. Without
-            an event the default is <code>keep_lane</code>. Each state has separately
-            tuned MPC parameters, while <code>behaviour_timer</code> and
-            <code>behaviour_callback</code> provide watchdog-like timing for competition
-            scenarios.
-          </p>
 
           <h3>Videos from the Project</h3>
           <div class="explained-video-list">
