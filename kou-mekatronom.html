@@ -85,9 +85,8 @@
             team rather than presenting the unfinished parts as complete.
           </p>
           <p>
-            The controller used a CasADi nonlinear MPC built around a bicycle model,
-            while obstacle avoidance was formulated through Euclidean-distance
-            constraints. For localization, I combined ZED 2i visual odometry and IMU
+            The controller used a CasADi nonlinear MPC built around a kinematic
+            bicycle model, detailed in the section below. For localization, I combined ZED 2i visual odometry and IMU
             data with wheel encoders and an additional IMU through
             <code>robot_localization</code>. I also converted the ZED point cloud into
             a 2D scan with <code>pointcloud_to_laserscan</code>, filtering the floor
@@ -103,6 +102,38 @@
             <li>ZED 2i, wheel-encoder, and IMU localization integration.</li>
             <li>Real/simulation validation and team-wide technical coordination.</li>
           </ul>
+
+          <h3>Nonlinear MPC Control</h3>
+          <p>
+            The car is driven by a nonlinear model-predictive controller written in
+            CasADi and solved with IPOPT. At every step it re-optimizes the trajectory
+            over a short horizon to reach the next Dijkstra waypoint while respecting the
+            vehicle's velocity and steering limits.
+          </p>
+          <ul class="ownership-list">
+            <li><strong>States</strong> <code>[x, y, θ]</code>; <strong>controls</strong> <code>[v, ω]</code> — linear velocity and steering.</li>
+            <li><strong>Model</strong> a kinematic bicycle model, <code>ẋ = v·cos θ</code>, <code>ẏ = v·sin θ</code>, <code>θ̇ = (v / L)·tan ω</code>, discretized with RK4 over the horizon.</li>
+            <li><strong>Objective</strong> a diagonal state cost <code>(Q_x, Q_y, Q_θ)</code> that tracks the target pose, plus a control cost <code>(R_v, R_ω)</code> that penalizes aggressive commands.</li>
+            <li><strong>Constraints</strong> steering bounded to about ±π/7.5 (~±24°) and velocity bounded per scenario (roughly 0.13–0.5 m/s); the state stays free.</li>
+            <li><strong>Solver</strong> IPOPT with up to 100 iterations, re-initialized whenever the behavior state changes.</li>
+          </ul>
+          <p>
+            The horizon length and gains are retuned per behavior state, because a tight
+            parking maneuver and a motorway stretch need very different responses:
+          </p>
+          <ul class="ownership-list">
+            <li><strong>Keep-lane</strong>: horizon <code>N = 12</code> at <code>0.2 s</code>, nominal tracking.</li>
+            <li><strong>Parking</strong>: <code>N = 6</code> at <code>0.1 s</code>, higher lateral weight and low steering penalty for tight, precise moves.</li>
+            <li><strong>Crosswalk</strong>: <code>N = 12</code> at <code>0.1 s</code>, speed dropped to ~0.13 m/s with a stronger heading weight.</li>
+            <li><strong>Motorway</strong>: <code>N = 4</code> at <code>0.2 s</code>, a shorter, faster horizon with a higher top speed (~0.5 m/s).</li>
+          </ul>
+          <p>
+            Obstacles are handled above the controller rather than as hard MPC
+            constraints: a detected obstacle on the active route marks those graph nodes
+            unusable and triggers a Dijkstra re-plan, so the MPC simply follows the new
+            waypoints. Traffic-light, stop-sign, and crosswalk events switch the state
+            machine, which swaps in the matching MPC gains.
+          </p>
 
           <h3>Videos from the Project</h3>
           <div class="explained-video-list">
