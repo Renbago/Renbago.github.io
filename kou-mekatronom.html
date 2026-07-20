@@ -111,10 +111,10 @@
             vehicle's velocity and steering limits.
           </p>
           <ul class="ownership-list">
-            <li><strong>States</strong> <code>[x, y, θ]</code>; <strong>controls</strong> <code>[v, ω]</code> — linear velocity and steering.</li>
+            <li><strong>States</strong> <code>[x, y, θ]</code>; <strong>controls</strong> <code>[v, ω]</code> for linear velocity and steering.</li>
             <li><strong>Model</strong> a kinematic bicycle model, <code>ẋ = v·cos θ</code>, <code>ẏ = v·sin θ</code>, <code>θ̇ = (v / L)·tan ω</code>, discretized with RK4 over the horizon.</li>
             <li><strong>Objective</strong> a diagonal state cost <code>(Q_x, Q_y, Q_θ)</code> that tracks the target pose, plus a control cost <code>(R_v, R_ω)</code> that penalizes aggressive commands.</li>
-            <li><strong>Constraints</strong> steering bounded to about ±π/7.5 (~±24°) and velocity bounded per scenario (roughly 0.13–0.5 m/s); the state stays free.</li>
+            <li><strong>Constraints</strong> steering bounded to about ±π/7.5 (~±24°) and velocity bounded per scenario (roughly 0.13 to 0.5 m/s); the state stays free.</li>
             <li><strong>Solver</strong> IPOPT with up to 100 iterations, re-initialized whenever the behavior state changes.</li>
           </ul>
           <p>
