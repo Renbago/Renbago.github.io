@@ -90,11 +90,14 @@
             <a href="https://github.com/MMehrez/MPC-and-MHE-implementation-in-MATLAB-using-Casadi" target="_blank" rel="noreferrer">Mohamed W. Mehrez's open CasADi MPC workshop</a>,
             ported and tuned the controller in MATLAB, then carried it into Gazebo
             simulation and finally onto the real car, building the whole pipeline myself.
-            For localization, I combined ZED 2i visual odometry and IMU
-            data with wheel encoders and an additional IMU through
-            <code>robot_localization</code>. I also converted the ZED point cloud into
-            a 2D scan with <code>pointcloud_to_laserscan</code>, filtering the floor
-            before feeding the obstacle-detection pipeline.
+            For localization, I fused ZED 2i visual odometry, wheel encoders, and two
+            IMUs through
+            <a href="https://github.com/cra-ros-pkg/robot_localization" target="_blank" rel="noreferrer"><code>robot_localization</code></a>,
+            with UWB planned as a future global reference. Instead of a LiDAR, I
+            converted the ZED point cloud into a 2D scan with
+            <code>pointcloud_to_laserscan</code>, filtered out the floor, and fed it into
+            a dynamic and static
+            <a href="https://github.com/jk-ethz/obstacle_detector" target="_blank" rel="noreferrer">obstacle detector</a>.
           </p>
           <ul class="ownership-list">
             <li>Graph-based route representation and start/target selection.</li>
@@ -106,6 +109,36 @@
             <li>ZED 2i, wheel-encoder, and IMU localization integration.</li>
             <li>Real/simulation validation and team-wide technical coordination.</li>
           </ul>
+
+          <h3>How the Algorithm Works</h3>
+          <p>
+            A <a href="https://github.com/Renbago/autonomus_vehicle/blob/main/src/example/config/fixed2.graphml" target="_blank" rel="noreferrer">GraphML node graph</a>
+            stores the road network. After a start and target node are chosen,
+            <a href="https://github.com/Renbago/autonomus_vehicle/blob/main/src/example/include/mekatronom/utilities/djikstra.h" target="_blank" rel="noreferrer">Dijkstra</a>
+            finds the shortest path and can skip excluded nodes, and the nonlinear MPC
+            follows the next <code>node_id</code> along that route.
+          </p>
+          <p>
+            The <a href="https://github.com/Renbago/autonomus_vehicle/tree/main/src/obstacle_detector" target="_blank" rel="noreferrer">obstacle detector</a>
+            passes each object's <code>center_x</code>, <code>center_y</code>, and
+            velocity to the
+            <a href="https://github.com/Renbago/autonomus_vehicle/blob/ba1dc0e1d733606ee26514bc1f55c89231d02a76/src/example/include/mekatronom/utilities/mpc_running.h#L181" target="_blank" rel="noreferrer">MPC</a>.
+            When an obstacle falls on a graph node, that node is marked blocked and
+            Dijkstra runs again: on a <code>pass_through</code> node the car pulls into
+            the left lane, otherwise it
+            <a href="https://github.com/Renbago/autonomus_vehicle/blob/5e3e2af504190099f591417b3469074eb4eb44af/src/example/include/mekatronom/utilities/traffic_sign_manager.h#L41" target="_blank" rel="noreferrer">waits until the obstacle clears</a>
+            and then re-plans the path.
+          </p>
+          <p>
+            A behavior state machine reacts to
+            <a href="https://github.com/ultralytics/ultralytics" target="_blank" rel="noreferrer">YOLO</a>
+            detections and obstacle events; with nothing happening it stays in
+            <code>keep_lane</code>. Each state carries its own
+            <a href="https://github.com/Renbago/autonomus_vehicle/blob/ba1dc0e1d733606ee26514bc1f55c89231d02a76/src/example/include/mekatronom/utilities/mpc_start_setting.h#L54-L84" target="_blank" rel="noreferrer">tuned MPC parameters</a>,
+            and a <code>behaviour_timer</code> works like a watchdog, firing
+            <code>behaviour_callback</code> to run timed competition maneuvers or to
+            recover when something goes wrong.
+          </p>
 
           <h3>Videos from the Project</h3>
           <div class="explained-video-list">
