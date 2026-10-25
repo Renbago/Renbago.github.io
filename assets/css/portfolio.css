@@ -688,7 +688,8 @@ a {
   border-radius: 6px;
 }
 
-.media-gallery img {
+.media-gallery img,
+.media-gallery video {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 10;

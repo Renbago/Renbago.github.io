@@ -7,13 +7,13 @@
     <style>
       :root { color-scheme: light; }
       * { box-sizing: border-box; }
-      @page { size: A4; margin: 14mm 15mm; }
+      @page { size: A4; margin: 11mm 14mm; }
       html, body { background: #ffffff; }
       body {
         font-family: "Arial", "Helvetica", "Liberation Sans", sans-serif;
         color: #1a1a1a;
-        font-size: 10.5pt;
-        line-height: 1.4;
+        font-size: 10.3pt;
+        line-height: 1.35;
         margin: 0;
         max-width: 200mm;
       }
@@ -30,7 +30,7 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.5pt;
-        margin: 15pt 0 4pt;
+        margin: 12pt 0 4pt;
         padding-bottom: 3pt;
         border-bottom: 1px solid #cfcfcf;
       }
@@ -41,11 +41,14 @@
       li { margin: 1.5pt 0; }
       p { margin: 4pt 0 0; }
       .tech { color: #333; }
-      .refs .ref { margin-top: 6pt; }
+      .refs .ref { margin-top: 3pt; }
+      .refs .ref > div { display: inline; }
       .refs .ref .sub { color: #333; font-size: 9.5pt; }
+      .refs .ref .sub::before { content: " | "; }
       .lk { font-size: 9pt; color: #666; }
       .lk a { color: #1155cc; }
-      section { break-inside: avoid; }
+      h2 { break-after: avoid; }
+      .refs { break-inside: avoid; }
       .entry { break-inside: avoid; }
     </style>
   </head>
@@ -68,14 +71,13 @@
     <section>
       <h2>Professional Summary</h2>
       <p>
-        Robotics Engineer with 400+ robots deployed in real-world applications, specializing in
-        localization, SLAM, and dynamic/static obstacle detection, now expanding into robot learning and
-        manipulation. I built the core localization stack at Saha Robotik and now lead its move
-        into robot learning and manipulation (OpenArm, LeRobot, and vision-language-action
-        policies), working remotely from Denmark. MSc candidate in Advanced Robotics at the University of
-        Southern Denmark, with dVRK surgical robot-learning research (diffusion policy) as a
-        part-time student researcher. Experienced in ROS 2/ROS, imitation learning, and team
-        leadership; managed the localization for Turkey's largest autonomous service-robot deployment (187,514 m&sup2;).
+        Robotics engineer whose localization and obstacle-detection systems run on 400+ deployed service
+        robots, now moving into robot learning and manipulation. I built the core 2D/3D localization stack
+        at Saha Robotik and now lead the company's robot-learning work (LeRobot and vision-language-action
+        policies), working remotely from Denmark. MSc student in Advanced Robotics at the University of
+        Southern Denmark, where I built a diffusion-policy pipeline on the physical da Vinci Research Kit
+        as a part-time student research assistant. Experienced in ROS 2/ROS, imitation learning, and team
+        leadership.
       </p>
     </section>
 
@@ -86,23 +88,31 @@
         <div class="entry-title">Robotics Engineer <span class="entry-meta">| Saha Robotik, Istanbul, Turkey | November 2023 - Present</span></div>
         <ul>
           <li>Designed and built the core localization and mapping architecture for 400+ autonomous waiter/cargo robots operating 24/7 in commercial environments.</li>
-          <li>Managed complete project lifecycle for Turkey's first 24/7 autonomous airport guide robot at Istanbul Airport, covering 187,514 m&sup2; with 25 km minimum daily travel. <span class="lk">(<a href="https://www.youtube.com/watch?v=auuvG2lX1qU">video</a>, <a href="https://renbago.github.io/MehmetBahaDursun/saha-robotics.html">project page</a>)</span></li>
-          <li>Since relocating to Denmark, work remotely; now advise mainly on localization while focusing on the company's OpenArm and vision-language-action robot-learning stack.</li>
-          <li>Leading a new bimanual mobile-manipulation project for restaurant table clearing that covers OpenArm hardware, teleoperation, data collection, and vision-language-action / LeRobot policies, toward a planned Eurostars collaboration between SDU and Saha. <span class="lk">(<a href="https://renbago.github.io/MehmetBahaDursun/openarm-restaurant-manipulation.html">project page</a>, <a href="https://renbago.github.io/MehmetBahaDursun/assets/files/mehmet-baha-dursun-recommendation-letter.pdf">recommendation letter</a>)</span></li>
-          <li>Built the dynamic and static obstacle-detection algorithm and worked on the MPPI (Model Predictive Path Integral) planning and control side, alongside the localization stack.</li>
-          <li>Led ROS training program, providing remote and on-site instruction to university students in Azerbaijan.</li>
-          <li>Technologies: ROS 2, C/C++, Python, SLAM, Localization, Obstacle Detection, MPPI.</li>
+          <li>Managed complete project lifecycle for Turkey's first 24/7 autonomous airport guide robot at Istanbul Airport, covering 137,221 m&sup2; with 25 km minimum daily travel. <span class="lk">(<a href="https://renbago.github.io/MehmetBahaDursun/assets/media/saha-istanbul-airport.mp4">video</a>, <a href="https://renbago.github.io/MehmetBahaDursun/saha-robotics.html">project page</a>)</span></li>
+          <li>Since relocating to Denmark, work remotely: still lead the 2D/3D localization work, now in a more supervisory role as the stack has matured, and lead the company's new bimanual mobile-manipulation project for restaurant table clearing (OpenArm hardware, teleoperation, data collection, vision-language-action / LeRobot policies), toward a planned Eurostars collaboration between SDU and Saha. <span class="lk">(<a href="https://renbago.github.io/MehmetBahaDursun/openarm-restaurant-manipulation.html">project page</a>)</span></li>
+          <li>Built the dynamic and static obstacle-detection algorithm alongside the localization stack.</li>
+          <li>Led Saha's ROS training program for university students in Azerbaijan (February - April 2025): one month of remote teaching, then on-site practical sessions and evaluation of the students' final projects. <span class="lk">(<a href="https://www.linkedin.com/feed/update/urn:li:activity:7315382416527822851/">program post</a>, <a href="https://renbago.github.io/MehmetBahaDursun/saha-robotics.html#azerbaijan">project page</a>)</span></li>
+          <li>Technologies: ROS 2, C/C++, Python, SLAM, 2D/3D Localization, Obstacle Detection.</li>
         </ul>
       </div>
 
       <div class="entry">
         <div class="entry-title">Student Research Assistant (Part-Time) <span class="entry-meta">| University of Southern Denmark (SDU), dVRK Surgical Robotics | October 2025 - May 2026</span></div>
         <ul>
-          <li>Built the full learning-based control pipeline for a bimanual suturing task on the physical da Vinci Research Kit (dVRK), end to end: synchronized data collection, LeRobot dataset conversion, diffusion-policy training, ROS 1 deployment, and closed-loop evaluation on the real robot. <span class="lk">(<a href="https://renbago.github.io/MehmetBahaDursun/dvrk-diffusion-policy.html">project page</a>, <a href="https://youtu.be/prwcpp9BP9c">result video</a>)</span></li>
+          <li>Built the full learning-based control pipeline for a bimanual suturing task on the physical da Vinci Research Kit (dVRK), end to end: synchronized data collection, LeRobot dataset conversion, diffusion-policy training, ROS 1 deployment, and closed-loop evaluation on the real robot. <span class="lk">(<a href="https://renbago.github.io/MehmetBahaDursun/dvrk-diffusion-policy.html">project page</a>, <a href="https://renbago.github.io/MehmetBahaDursun/assets/media/dvrk-diffusion-policy-full.mp4">result video</a>)</span></li>
           <li>Diagnosed a vision-encoder failure with representation probes (decoder feature-inversion adapted from LeWorldModel, Yann LeCun et al.) and improved policy behavior by moving from a ResNet to a fine-tuned DINOv2 encoder with state-dropout.</li>
           <li>Bridged the gap between simulated/theoretical models and real-world execution on a surgical robotics platform.</li>
           <li>Supervised by Associate Professor I&ntilde;igo Iturrate. <span class="lk">(<a href="https://portal.findresearcher.sdu.dk/en/persons/i%C3%B1igo-iturrate/">profile</a>, <a href="https://renbago.github.io/MehmetBahaDursun/assets/files/mehmet-baha-dursun-recommendation-letter.pdf">recommendation letter</a>)</span></li>
           <li>Technologies: dVRK, ROS 1, PyTorch, Diffusion Policy, DINOv2, Python, C++.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-title">Student Researcher (Part-Time) <span class="entry-meta">| University of Southern Denmark (SDU), Surgical Teleoperation | June 2026 - October 2026</span></div>
+        <ul>
+          <li>Laid the foundation for teleoperating the lab's UR5 cell, which carries a da Vinci surgical instrument, from a GELLO leader arm: leader firmware and calibration, one-to-one RViz/URSim synchronization, and clutched Cartesian control through the lab's existing IK, UR RTDE and instrument (EUA) controllers.</li>
+          <li>Added a safety layer (speed and lag limits, runaway rejection, disengagement on stale feedback or a lost pedal), validated in URSim and a hardware dry run (instrument following the leader, UR arm idle), and handed over to the lab after a short engagement.</li>
+          <li>Technologies: ROS 2, Python, Docker, UR RTDE, DYNAMIXEL.</li>
         </ul>
       </div>
     </section>
@@ -122,15 +132,16 @@
     <section>
       <h2>Education</h2>
       <div class="entry">
-        <div class="entry-title">Master of Science in Advanced Robotics <span class="entry-meta">| University of Southern Denmark, Odense | August 2025 - Present</span></div>
+        <div class="entry-title">MSc in Engineering, Robot Systems (Advanced Robotics Technology) <span class="entry-meta">| University of Southern Denmark, Odense | August 2025 - June 2027 (expected)</span></div>
         <ul>
           <li>Full scholarship recipient.</li>
+          <li>Thesis (with Saha Robotik): Language-Conditioned Mobile Manipulation for Restaurant Table Clearing: Adapting Vision-Language-Action Models to a Bimanual Mobile Service Robot.</li>
         </ul>
       </div>
       <div class="entry">
         <div class="entry-title">Bachelor of Science in Mechatronics Engineering <span class="entry-meta">| Kocaeli University, Turkey | August 2019 - October 2024</span></div>
         <ul>
-          <li>GPA: 3.2 / 4.0.</li>
+          <li>GPA: 3.19 / 4.00 (Honor Student).</li>
         </ul>
       </div>
     </section>
@@ -147,7 +158,7 @@
         <ul>
           <li>Led a 20-member student team developing autonomous vehicle systems for international competitions.</li>
           <li>Selected and led a five-person squad to the Bosch Future Mobility Challenge on-site final, the only Turkish finalist (Top 24 of 160 global teams). <span class="lk">(<a href="https://renbago.github.io/MehmetBahaDursun/kou-mekatronom.html">project page</a>, <a href="https://github.com/Renbago/autonomus_vehicle">code</a>, <a href="https://www.youtube.com/watch?v=WsCecAzwwFc">video</a>)</span></li>
-          <li>Achieved 6th place in two consecutive Teknofest Robotaxi competitions.</li>
+          <li>Placed 6th at Teknofest Robotaxi 2023, up from 19th in 2022.</li>
           <li>Managed project planning, resource allocation, and technical development for the autonomous-driving stack.</li>
           <li>Open-sourced project code and tutorials to support future cohorts.</li>
           <li>Led the team through 2024 and continue to mentor since then; as of 2026 still a mentor, with limited time on critical points.</li>
@@ -166,7 +177,7 @@
       <h2>References</h2>
       <div class="ref">
         <div class="entry-title">Professor Metin Ayd&#305;n <span class="entry-meta">| Kocaeli University</span></div>
-        <div class="sub">Email: metin.aydin@kocaeli.edu.tr &nbsp;|&nbsp; Phone: +90 262 303 3231</div>
+        <div class="sub">Email: metin.aydin@kocaeli.edu.tr</div>
       </div>
       <div class="ref">
         <div class="entry-title">Asst. Prof. Suat Karakaya <span class="entry-meta">| Kocaeli University</span></div>
@@ -177,8 +188,16 @@
         <div class="sub">[Contact information to be provided upon request]</div>
       </div>
       <div class="ref">
-        <div class="entry-title">Associate Professor I&ntilde;igo Iturrate <span class="entry-meta">| University of Southern Denmark (dVRK project supervisor)</span></div>
-        <div class="sub">Profile: <a href="https://portal.findresearcher.sdu.dk/en/persons/i%C3%B1igo-iturrate/">portal.findresearcher.sdu.dk/en/persons/iñigo-iturrate</a></div>
+        <div class="entry-title">Assoc. Prof. I&ntilde;igo Iturrate <span class="entry-meta">| SDU (dVRK supervisor)</span></div>
+        <div class="sub">Email: inju@mmmi.sdu.dk &nbsp;|&nbsp; <a href="https://portal.findresearcher.sdu.dk/en/persons/i%C3%B1igo-iturrate/">Profile</a> &nbsp;|&nbsp; <a href="https://renbago.github.io/MehmetBahaDursun/assets/files/mehmet-baha-dursun-recommendation-letter.pdf">Recommendation letter</a></div>
+      </div>
+      <div class="ref">
+        <div class="entry-title">O&#287;uzhan K&ouml;se <span class="entry-meta">| CTO, Saha Robotik</span></div>
+        <div class="sub">Contact details available upon request</div>
+      </div>
+      <div class="ref">
+        <div class="entry-title">Murat Ayranc&#305; <span class="entry-meta">| Founder &amp; CEO, Saha Robotik</span></div>
+        <div class="sub">Contact details available upon request</div>
       </div>
     </section>
   </body>
